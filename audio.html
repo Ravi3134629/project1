@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+    <audio controls id="myAudio">
+         <source src="audio.mp3">
+    </audio>
+
+    <button onmouseenter="playAudio()" onmouseleave="pauseAudio()" type="button">Play Audio</button>
+    <script>
+        var x = document.getElementById("myAudio");
+
+        function playAudio() {
+            x.play();
+        }
+
+        function pauseAudio() {
+            x.pause();
+        }
+    </script>
+</body>
+
+</html>

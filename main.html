@@ -1,0 +1,737 @@
+{% extends 'mnfapp/homebase.html'%} {% load static %} {% load socialaccount %} {% block title %}Home {%endblock%} {% block content %} {% providers_media_js %}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat&family=Pacifico&display=swap" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<title>MNF Home Page</title>
+<section class="section text-white overflow-hidden" style="background-color: #4267B2;">
+    <style>
+        .body {
+            font-family: Helvetica, sans-serif;
+        }
+        
+         :placeholder-shown {
+            font-weight: bold;
+            font-family: Helvetica, sans-serif;
+        }
+        
+         ::placeholder {
+            font-weight: bold;
+            color: black;
+            opacity: 1;
+        }
+        
+         ::-webkit-input-placeholder {
+            /* WebKit, Blink, Edge */
+            color: #909;
+        }
+        
+        .zoom:hover {
+            -ms-transform: scale(1.5);
+            /* IE 9 */
+            -webkit-transform: scale(1.5);
+            /* Safari 3-8 */
+            transform: scale(1.5);
+        }
+        
+        .callout {
+            position: relative;
+            /* bottom: 165px;
+       right: 20px;
+       margin-left: 20px; */
+            /* max-width: 1000px;
+       max-height: 600px; */
+            z-index: 1;
+            border-radius: 15px;
+            max-width: 85%;
+            overflow-y: auto;
+            max-height: 500px;
+            margin-left: 25%;
+        }
+        
+        .callout-header {
+            padding: 0px 15px;
+            background: #44499e;
+            font-size: 20px;
+            color: white;
+        }
+        
+        .callout-container {
+            padding: 15px;
+            background-color: #e9eaf3;
+            color: black;
+            text-align: left;
+        }
+        
+        .callout-btn {
+            margin-left: 10%;
+        }
+        
+        .closebtn {
+            position: absolute;
+            top: -15px;
+            right: 15px;
+            color: white;
+            font-size: 30px;
+            cursor: pointer;
+        }
+        
+        .closebtn:hover {
+            color: red;
+        }
+        
+        #hover-item:hover {
+            background-color: lightgrey;
+        }
+        
+        #pagehead-fr {
+            animation: blink 1s linear infinite;
+        }
+        
+        @keyframes blink {
+            0% {
+                opacity: 0;
+            }
+            50% {
+                opacity: .5;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+        
+        #right {
+            position: relative;
+            animation-name: example;
+            animation-duration: 3s;
+        }
+        
+        @keyframes example {
+            0% {
+                left: 300px;
+                right: 0px;
+            }
+            100% {
+                left: 0px;
+                right: 0px;
+            }
+        }
+        
+        .section {
+            margin-top: 54px;
+        }
+        
+        @media only screen and (max-width: 990px) {
+            .section {
+                margin-top: -35px;
+            }
+        }
+        
+        @media only screen and (max-width: 770px) {
+            .section {
+                margin-top: -20px;
+            }
+            .callout-btn {
+                margin-left: -10%;
+            }
+        }
+        
+        @media only screen and (max-width: 600px) {
+            .callout {
+                left: 0;
+                margin-left: 7%;
+            }
+        }
+        
+        .margn {
+            margin-left: 0px;
+        }
+        
+        #ac-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, .6);
+            z-index: 1001;
+        }
+        
+        #popup {
+            width: 630px;
+            height: 500px;
+            background: #FFFFFF;
+            border: 5px solid #000;
+            border-radius: 25px;
+            -moz-border-radius: 25px;
+            -webkit-border-radius: 25px;
+            box-shadow: #64686e 0px 0px 3px 3px;
+            -moz-box-shadow: #64686e 0px 0px 3px 3px;
+            -webkit-box-shadow: #64686e 0px 0px 3px 3px;
+            position: relative;
+            top: 150px;
+            left: 730px;
+        }
+        
+        #Viwerdiv {
+            width: 60vw;
+            left: 20vw;
+            top: l0%;
+        }
+        
+        @media (max-width: 767.98px) {
+            #Viwerdiv {
+                width: 98vw;
+                left: 1vw;
+                top: 10%;
+            }
+        }
+    </style>
+    <script>
+        function PopUp() {
+            document.getElementById('ac-wrapper').style.display = "none";
+        }
+    </script>
+
+    <div id="Viwerdiv" style=" position: absolute;border-radius: 8px;z-index: 9999;padding:0.4em; background-color:#ffe2e5;  ">
+        <button id="cancelDiv" onclick="$('#Viwerdiv').hide();" style=" margin:0.3em;margin-left: 87%;border: 0; color: white; padding: 1mm;    width: 2em; height: 2em; ">
+            <b style="color:red;font-size:18px;">x</b>
+        </button>
+        <br>
+        <div class="row text-center">
+            <div class="col-sm-12">
+                {% comment %} <img src="../mnfapp/templates/mnfapp/image.jpeg" alt="photo" style="width: 100%;"> {% endcomment %}
+                <img src="{%static 'eventposter.jpeg' %}" alt="photo" style="width: 100%;">
+            </div>
+            <div class="col-sm-12" style="margin-top: 10px;">
+                <a href="https://mynextfilm.com/events/register/" class="btn btn danger" style="color: #fff; background-color: #ee3c4d; font-size: 16px; font-weight: 700;">Get Invited</a>
+            </div>
+        </div>
+    </div>
+    <!-- <input type="submit" name="submit" value="Submit" onClick="PopUp()" />
+ 
+             <a href="https://mynextfilm.com/events/register/" class="btn btn danger">click here</a>
+         </center> -->
+    <!-- </div>
+</div> -->
+    <!-- <div id="ac-wrapper">
+        <div id="popup">
+            <center>
+            <img src="{%static 'pop.jpeg' %}" alt="photo">
+                <input type="submit" name="submit" value="Submit" onClick="PopUp()" />
+                <a href="https://mynextfilm.com/events/register/" class="btn btn danger">click here</a>
+            </center>
+        </div>
+    </div> -->
+    <!-- pop up -->
+
+    <div class="events-container">
+        <marquee width="100%" direction="left" height="35px" style="background-color: #ffe2e5; vertical-align: middle; margin-top: -8px; " class="events-slider" onmouseover="this.stop();" onmouseout="this.start();" scrolldelay="100">
+            <div class="check" style="margin-top: 5px; color: #ee293d;font-weight: bold;font-family: Helvetica, sans-serif;">
+                <!-- <img src="./assets/image.jpg" alt="Avatar" style="width:40px; border-radius: 5px;"> -->
+                Monetise your creativity.&nbsp;
+                <!-- <img src="./assets/image.jpg" alt="Avatar" style="width:40px; border-radius: 5px;"> -->
+                Cut down your filmmaking duration.&nbsp;Prepone your Boxoffice receipts.&nbsp;Convert your script in 114+ global languages.&nbsp;Establish and manage Harkat (your own local filmmaking club).&nbsp;Get a gripping narration of your screenplay.&nbsp;Finalise
+                your Cast, Crew, Locations, Services and Resources.&nbsp;Dynamically schedule and control your filmmaking project.&nbsp;
+            </div>
+
+        </marquee>
+
+    </div>
+
+    <div class="container" id="first" style="width: 100%;">
+
+        <br>
+        <div class="row">
+
+            <div class="col-md-5" style="padding-top: 0px;">
+
+                <!-- </div> -->
+
+                <h2 style="text-align: center;font-family: Helvetica, sans-serif;font-style: italic;"><span id="pagehead">Pull Your Filmmaking</span>
+                    <br><span id="right">Future into Present!</span></h2><br>
+                <h2 id="pagehead-fr" style="font-size: 28px; font-weight: bold;margin-top: 0rem; margin-left: 20%;">Sign up - its FREE!</h2>
+                <!-- <h3 style="text-align: center;">OR</h3> -->
+                <div style="justify-content: center; margin-left: 1rem;">
+
+                    <div class="col-md-8 mx-6" style="max-width: 18rem;margin-left: 6rem;font-family: Helvetica, sans-serif;">
+                        <h6 style="font-size: 15px;text-align: center;font-family: Helvetica, sans-serif; margin-top: 0.6rem;">By signing up, I agree to MNF's <a href="{% static 'homepage/PrivacyPolicy.html' %}" target="_blank" style="text-decoration: underline;">Privacy policy</a> and <a href="{% static 'tnc.html' %}" target="_blank" style="text-decoration: underline;">Terms of Service.</a>
+                        </h6>
+                        <a href='{% provider_login_url "google" %}'> <button class="btn btn-sm btn-google btn-block btn-outline" style="text-transform: capitalize; background-color: #fff;color: #000; font-weight: normal;font-size: 15px; border-radius: 25px; width: 100%;margin-left: 7px;margin-right: 20%; "><img class="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" style="width: 20px;height: 30px;" /><span style="text-transform: none;">&nbsp;Join with Google</span></button></a>
+                    </div>
+                </div>
+
+
+                <h6 style="margin-left: 42%;">OR</h6>
+                <!-- <div class="row" style="justify-content: center;">
+                    
+                    <div class="col-md-7" style="text-align: center;"> <button class="btn btn-lg btn-google btn-block btn-outline" href='{% provider_login_url "google" %}' style="text-transform: capitalize; background-color: #ffe2e5;color: #ee293d; font-weight: bold;font-size: 15px;">SignUp&nbsp;with&nbsp;Email&nbsp;</button> </div>
+                </div> -->
+
+
+                <!-- <p class="small mt-3 " style="font-size: 16px;color: #fff;">or use your <a href='{% provider_login_url "google" %}'><u style="color: #fff;">Google account</u></a></p> -->
+                <div class="row">
+                    <form method="POST" enctype="multipart/form-data" class="col-md-11 input-border" action="{%url 'register'%}">
+                        {%csrf_token%}
+                        <!-- <div class="form-group" style="width: 380px;">
+
+                            <input type="text" name = 'firstname' class="form-control form-control-lg" placeholder="First Name" style="height: 40px;" required>
+                        </div>
+                        <div class="form-group" style="width: 380px;">
+                            <input type="text" name="lastname" class="form-control form-control-lg" placeholder="Last Name" style="height: 40px; margin-top: -14px;" required>
+                        </div> -->
+
+
+                        <!-- <div class="form-group" style="width: 380px;">
+                            <input type="password" name="password" class="form-control form-control-lg" placeholder="Password" style="height: 40px; margin-top: -13px;" required>
+                        </div> -->
+
+                        <div style="display: none;">
+                            {% if refferedBy %}
+                            <input type="text" name="refferedBy" id="" value="{{refferedBy}}"> {%else%}
+                            <input type="text" name="refferedBy" id="" value=""> {% endif %}
+                        </div>
+                        <div class="form-group" style="display: flex; flex-direction: column; border-radius: 8px;">
+                            <!-- <h5 style="text-align: center; text-decoration: underline; "><a href="{%url 'signin'%}">Existing user Sign in</a></h5> -->
+
+                            <input style="margin-left : 40px; width : 80%;  height: 35px; border-radius: 5px;" type="email" name="email" class="form-control form-control-lg text-bold" placeholder="Sign Up With Email" style="  margin-top: 0px; " required>
+                            <input style="margin-left : 40px; width : 80%;height: 35px; border-radius: 5px;" class="form-control my-2 text-bold" name="password" type="password" placeholder="Password">
+                            <button class="btn btn-block btn-sm btn-success mx-auto" style="width: 176px;text-transform: capitalize; background-color: #ffe2e5;color: #ee293d;border:1px solid #ee293d; font-weight: bold;font-size: 15px; border-radius: 8px;  font-family: Helvetica, sans-serif;letter-spacing: 0px;">Sign up</button>
+                        </div>
+
+                    </form>
+                </div>
+                <br>
+
+            </div>
+
+
+
+
+            <!-- -->
+
+
+            <div class="col-md-7 ml-auto text-center">
+                <div class="margn">
+
+                    <div class="callout anna " style="width: 320px;left: 0px;">
+                        <div class="callout-header " style="text-align: center;font-weight: bold; display: flex;">
+                            <div style="width: 1.4cm; height:1cm; background-color: yellow; border-radius: 50%; text-align: center; border:solid black 1px; margin-right: 8px;">
+                                <h6 style="text-align: center; margin-top:2px;color: red;">Free</h6>
+                            </div>Forthcoming&nbsp;Event
+                        </div>
+                        <!-- <span class="closebtn" onclick="this.parentElement.style.display='none';">×</span> -->
+                        <div class="callout-container">
+                            {%for i in list%}
+
+                            <a class="media text-default align-items-center mb-5" href="/events/register/" target="_blank" setTimeout(autoPlayVideo(), 2000);>
+                                <!-- <img class="rounded w-65px mr-4" src="../../../media/{{i.EventPoster}}" > -->
+                                <div style="margin-bottom: -30px;">
+                                    <h5 style="text-align: center; font-size: 13px; color: #7ba63a;"><span style=" font-weight: bold;font-family: Helvetica, sans-serif; font-size: 36.1px;">{{i.EventName}} </span>
+                                    </h5>
+                                    <h5 style="text-align: center;margin-top: -23px;"><span style="font-weight: bold; text-align: center;font-family: Helvetica, sans-serif; font-size: 16px; color: black;">{{i.EventTagLine}}</span> </h5>
+                                    <span style="color: black; font-weight: bold;font-family: Helvetica, sans-serif;"><span id="{{i.id}}"></span>, {{i.EventTime}} IST (14:00 GMT)
+                                    <div class="col callout-btn" style="margin-left: 14px;"> <button class="btn btn-sm btn-google btn-block btn-outline my-auto" href='/events/register/{{i.id}}' style="text-transform: capitalize; background-color: #ffe2e5;color: #ee293d; font-weight: bold;font-size: 15px; border-radius: 8px; width: 220px; font-family: Helvetica, sans-serif;letter-spacing: 0px;"><span >Click&nbsp;to&nbsp;get&nbsp;invited</button>                                        </span>
+                                    </div>
+                                </div>
+                                <!--
+<script>
+    const monthNames = ["","January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December"
+];
+document.getElementById("{{i.id}}").innerHTML=monthNames[parseInt({{i.EventDate1|slice:"5:-3"}})]
+console.log(monthNames[parseInt({{i.EventDate1|slice:"6:-3"}})])
+// const d = new Date(2021-10-26);
+
+</script>
+-->
+                                <script>
+                                    const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+                                    var dayOfWeek = 2; //friday 
+                                    var date = new Date();
+                                    var diff = date.getDay() - dayOfWeek;
+                                    var resultDate = new Date(date.getTime());
+                                    resultDate.setDate(date.getDate() + (7 + dayOfWeek - date.getDay()) % 7);
+                                    document.getElementById('{{i.id}}').innerHTML = String(resultDate.getDate()) + " " + monthNames[resultDate.getMonth()] + " " + resultDate.getFullYear()
+                                    console.log(date);
+                                </script>
+                                <!--<p class="media-body small-2 lh-4 mb-0"><b>On {{i.EventDate1}} @ {{i.EventTime}}</b></p>-->
+                            </a>
+
+                            {%endfor%}
+                        </div>
+                    </div>
+                    <div class="video">
+
+                        <h2 style="font-family: Helvetica, sans-serif">Scriptwriters’ Pains Alleviated</h2>
+                        <video width="450" height="250" onplay="stopOtherMedia(this)" id="audioplayer" controls data-second="2.0 ">
+                        <source src="{%static 'MNF.webm' %}" type="video/mp4" controlsList="nodownload noplaybackrate nofullscreen noremoteplayback">
+                     
+                        Your browser does not support the video tag.
+                      </video>
+                        <!-- <video width="450" height="320" autoplay playsinline loop
+                [muted]=true>
+                    <source src="{%static 'home_page.webm' %}" type="video/mp4">
+                    
+                    Your browser does not support the video tag.
+                </video> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <div>
+        <a href="#section-features"> <button class="btn btn-circle btn-primary" style="float: right;"><i class="fa fa-angle-down" aria-hidden="true"></i></button></a>
+    </div>
+
+</section>
+
+
+<section class="section" id="section-features">
+    <div class="container-fluid">
+
+        <div class="section-header feature-1">
+            <h4 style="font-weight: bold; text-decoration: underline;font-family: Helvetica, sans-serif;">Current Offerings</h4>
+
+
+            <p class="text-muted" style="padding-right: 50px;">
+                <ul style="color: #000;font-family: Helvetica, sans-serif; font-weight: bold; text-align: left; margin-left: 15%; ">
+                    <li>We offer our products as SaaS on Pay As You Go model.</li>
+                    <li> Sample Scripts in Several languages available for testing.</li>
+                    <li>Free Conversion/Narration of upto 5 pages. 70% discount upto 31st March.</li>
+                    <li>Additional Discounts for yearly members, Language Pair Partners and Relationship Managers.</li>
+                </ul>
+            </p>
+
+
+        </div>
+
+        <div class="row text-center" style="margin-top: -90px;">
+
+            <div class="col-md-6 col-xl-6 feature-1">
+
+                <p class="feature-icon"> <video onplay="stopOtherMedia(this)" width="320" height="240" controls controlsList="nodownload noplaybackrate  noremoteplayback">
+                    <source src="{%static 'homepage/assets/img/Conversion_Demo.webm'%}" type="video/mp4">
+                    Your browser does not support the video tag.
+                  </video></p>
+                <h5 style="font-weight: bold;font-family: Helvetica, sans-serif;">Conversion Studio</h5>
+                <p class="text-muted">
+                    <ul style="text-align: left;color: #000;font-family: Helvetica, sans-serif; font-weight: bold;">
+                        <li>
+                            Convert your screenplay in the language of your choice.
+                        </li>
+                        <li>
+                            Choose seperate languages and scripts for Dialogues and Action Lines.
+                        </li>
+                        <li>
+                            Option of dual dialogue feature (original and translated dialogues side by side).
+                        </li>
+                        <li>
+                            Option to get your translated script vetted by our Language Pair Partner.
+                        </li>
+                    </ul>
+                </p>
+
+                <!-- <a class="btn btn-sm btn-success" onclick="myFunction1()" id="myBtn1" style="background-color: #7AC042; color: #fff;">Read More</a> -->
+
+            </div>
+
+            <div class="col-md-6 col-xl-6 feature-1">
+                <p class="feature-icon"> <video onplay="stopOtherMedia(this)" width="320" height="240" controls controlsList="nodownload noplaybackrate  noremoteplayback"> 
+                    <source src="{%static 'homepage/assets/img/narration-help.webm'%}" type="video/mp4">
+                  
+                    Your browser does not support the video tag.
+                  </video></p>
+                <h5 style="font-weight: bold;font-family: Helvetica, sans-serif;">Narration Room</h5>
+                <p class="text-muted">
+                    <ul style="text-align: left;color: #000;font-family: Helvetica, sans-serif; font-weight: bold;">
+                        <li>
+                            Create Audio-visual Pitchdeck of your Script.
+                            <li>
+                                Create a one page Synopsis of your Screenplay.
+                            </li>
+                            <li>
+                                Create Audio-visual Screenplay Analysis and Charactor Introductions.
+                            </li>
+                            <li>Create a line by line Audio-visual Narration of your Screenplay.</li>
+                        </li>
+                    </ul>
+                </p>
+
+                <!-- <a class="btn btn-sm btn-success" onclick="myFunction2()" id="myBtn2" style="background-color: #7AC042; color: #fff;">Read More</a> -->
+            </div>
+
+            <!-- <div class="col-md-6 col-xl-4 feature-1">
+                <p class="feature-icon"> <video width="260" height="140" controls>
+                    <source src="./assets/img/Conversion_Demo.webm" type="video/mp4">
+                  
+                    Your browser does not support the video tag.
+                  </video></p>
+                <h5>Harkat Club</h5>
+                <p class="text-muted" style="text-align: left; color: black;">Provides you an opportunity to be a part of Film fraternity, <span id="dots3">...</span><span id="more3">build network and form your own club in your area. It provide a common platform to all film enthusiast where everyone can
+                    learn by experimenting and collaborating. You can organise events, post and view your club activities.</span>
+                </p>
+
+                <a class="btn btn-sm btn-success" onclick="myFunction3()" id="myBtn3" style="background-color: #7AC042; color: #fff;">Read More</a>
+            </div> -->
+
+        </div>
+
+        <!-- <header class="section-header">
+            <br>
+            <h2>Important</h2>
+            <p class="lead" style="color: #000; font-weight: bold;">Sample Scripts in Several languages available for testing.<br> Free Conversion/Narration of upto 5 pages. 70% discount upto 31st March.<br> Additional Discounts for yearly members, Languag Pair Partners and Relationship Managers.</p>
+
+        </header> -->
+    </div>
+    <div class="container-fluid">
+
+        <div class="section-header feature-1">
+            <h4 style="font-weight: bold; text-decoration: underline;font-family: Helvetica, sans-serif;color: #ee3c4d;">Coming soon</h4>
+
+
+            <p class="text-muted" style="padding-right: 50px;">
+                <ul style="color: #000;font-family: Helvetica, sans-serif; font-weight: bold; text-align: left; margin-left: 15%; ">
+                    <li>Harkat (Local film making clubs).</li>
+                    <li>Idea Mall (Commission Scriptwriting Assignments & Auction Your Projects).</li>
+                    <li>Script Builder (Write or Audit your Scripts OR convert your Story into Screenplay).</li>
+                    <!-- <li>Preview Chamber (Create a 3D Animated Video of your Script).</li> -->
+                    <li>Project Center (Schedule making of your film from Ideation to Exhibition).</li>
+                    <li>Viewer's Lounge (Upload your Films and attract attention).</li>
+                    <li>Subtitling of your Videos in the Language of your choice</li>
+                </ul>
+            </p>
+
+
+        </div>
+        <br>
+        <!-- <div class="row text-center" style="margin-top: -90px;">
+
+            <div class="col-md-6 col-xl-6 feature-1">
+
+                <p class="feature-icon"> <video onplay="stopOtherMedia(this)" width="320" height="240" controls controlsList="nodownload noplaybackrate  noremoteplayback">
+                    <source src="{%static 'homepage/assets/img/Conversion_Demo.webm'%}" type="video/mp4">
+                    Your browser does not support the video tag.
+                  </video></p>
+                <h5 style="font-weight: bold;font-family: Helvetica, sans-serif;">Conversion Studio</h5>
+                <p class="text-muted">
+                    <ul style="text-align: left;color: #000;font-family: Helvetica, sans-serif; font-weight: bold;">
+                        <li>
+                            Convert your screenplay in the language of your choice.
+                        </li>
+                        <li>
+                            Choose seperate languages and scripts for Dialogues and Action Lines.
+                        </li>
+                        <li>
+                            Option of dual dialogue feature (original and translated dialogues side by side).
+                        </li>
+                        <li>
+                            Option to get your translated script vetted by our Language Pair Partner.
+                        </li>
+                    </ul>
+                </p>
+
+               </div>
+
+            <div class="col-md-6 col-xl-6 feature-1">
+                <p class="feature-icon"> <video onplay="stopOtherMedia(this)" width="320" height="240" controls controlsList="nodownload noplaybackrate  noremoteplayback"> 
+                    <source src="{%static 'homepage/assets/img/narration-help.webm'%}" type="video/mp4">
+                  
+                    Your browser does not support the video tag.
+                  </video></p>
+                <h5 style="font-weight: bold;font-family: Helvetica, sans-serif;">Narration Room</h5>
+                <p class="text-muted">
+                    <ul style="text-align: left;color: #000;font-family: Helvetica, sans-serif; font-weight: bold;">
+                        <li>
+                            Create a line by line Audio-visual narration of your screenplay.
+                            <li>
+                                Also create Audio-visual Pitchdeck, Screenplay Analysis and Charactor Introduction.
+                            </li>
+                            <li>
+                                Create a one page synopsis of your screenplay.
+                            </li>
+                        </li>
+                    </ul>
+                </p>
+ </div>
+
+          
+
+        </div> -->
+
+
+    </div>
+</section>
+
+
+
+<!-- <section class="section bg-gray" id="testimonial">
+    <div class="container">
+        <header class="section-header">
+
+            <h2>Testimonials</h2>
+        </header>
+
+
+        <div class="row" style="justify-content: center;">
+            <video onplay="stopOtherMedia(this)" width="620" height="300" controls controlsList="nodownload noplaybackrate  noremoteplayback">
+                <source src="{%static 'homepage/assets/img/MNF Basic for investors.mp4'%}" type="video/mp4">
+
+                Your browser does not support the video tag.
+            </video>
+
+        </div>
+
+    </div>
+
+    <div class="container">
+
+
+        <div data-provide="slider" data-dots="true" data-autoplay="false" data-slides-to-show="2">
+            <div class="p-5">
+                <div class="card shadow-3">
+                    <div class="card-body px-6">
+                        <div class="rating mb-3">
+                            <label class="fa fa-star active"></label>
+                            <label class="fa fa-star active"></label>
+                            <label class="fa fa-star active"></label>
+                            <label class="fa fa-star active"></label>
+                            <label class="fa fa-star active"></label>
+                        </div>
+
+                        <p class="text-quoted mb-5 font-weight-bold" style="font-family: Helvetica, sans-serif;">Kafi badhiya hai (Too good).. ekdum feel aata hai (generates a real feeling)</p>
+                        <div class="media align-items-center pb-0">
+                            <img class="avatar avatar-xs mr-3" src="{%static 'homepage/A.jpg'%}" alt="...">
+                            <div class="media-body lh-1">
+                                <div class="fw-400 small-1 mb-1" style="font-family: Helvetica, sans-serif;">Vipul Sharma</div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-5">
+                <div class="card shadow-3">
+                    <div class="card-body px-6">
+                        <div class="rating mb-3">
+                            <label class="fa fa-star active"></label>
+                            <label class="fa fa-star active"></label>
+                            <label class="fa fa-star active"></label>
+                            <label class="fa fa-star active"></label>
+                            <label class="fa fa-star active"></label>
+                        </div>
+
+                        <p class="text-quoted mb-5 font-weight-bold" style="font-family: Helvetica, sans-serif;">Other Translations give different meaning. This gives similar meaning.
+                        </p>
+                        <div class="media align-items-center pb-0">
+                            <img class="avatar avatar-xs mr-3" src="{%static 'homepage/B.jpg'%}" alt="...">
+                            <div class="media-body lh-1">
+                                <div class="fw-400 small-1 mb-1" style="font-family: Helvetica, sans-serif;">Shreedhar karanji</div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-5">
+                <div class="card shadow-3">
+                    <div class="card-body px-6">
+                        <div class="rating mb-3">
+                            <label class="fa fa-star active"></label>
+                            <label class="fa fa-star active"></label>
+                            <label class="fa fa-star active"></label>
+                            <label class="fa fa-star active"></label>
+                            <label class="fa fa-star active"></label>
+                        </div>
+
+                        <p class="text-quoted mb-5 font-weight-bold" style="font-family: Helvetica, sans-serif;">Software will take care of the drudgery part and scriptwriter can concentrate on creativity. It is a very good product and has a great future.</p>
+                        <div class="media align-items-center pb-0">
+                            <img class="avatar avatar-xs mr-3" src="{%static 'homepage/C.jpg'%}" alt="...">
+                            <div class="media-body lh-1">
+                                <div class="fw-400 small-1 mb-1" style="font-family: Helvetica, sans-serif;">Ravindra Badgaiyan</div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-5">
+                <div class="card shadow-3">
+                    <div class="card-body px-6">
+                        <div class="rating mb-3">
+                            <label class="fa fa-star active"></label>
+                            <label class="fa fa-star active"></label>
+                            <label class="fa fa-star active"></label>
+                            <label class="fa fa-star active"></label>
+                            <label class="fa fa-star active"></label>
+                        </div>
+
+                        <p class="text-quoted mb-5 font-weight-bold" style="font-family: Helvetica, sans-serif;"> Mera aadha kaam ho gaya!.</p>
+                        <div class="media align-items-center pb-0">
+                            <img class="avatar avatar-xs mr-3" src="{%static 'homepage/D.jpg'%}" alt="...">
+                            <div class="media-body lh-1">
+                                <div class="fw-400 small-1 mb-1" style="font-family: Helvetica, sans-serif;">Medh Pranav</div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-5">
+                <div class="card shadow-3">
+                    <div class="card-body px-6">
+                        <div class="rating mb-3">
+                            <label class="fa fa-star active"></label>
+                            <label class="fa fa-star active"></label>
+                            <label class="fa fa-star active"></label>
+                            <label class="fa fa-star active"></label>
+                            <label class="fa fa-star active"></label>
+                        </div>
+
+                        <p class="text-quoted mb-5 font-weight-bold" style="font-family: Helvetica, sans-serif;"> Its a boon to Scriptwriters.</p>
+                        <div class="media align-items-center pb-0">
+                            <img class="avatar avatar-xs mr-3" src="{%static 'homepage/E.jpg'%}" alt="...">
+                            <div class="media-body lh-1">
+                                <div class="fw-400 small-1 mb-1" style="font-family: Helvetica, sans-serif;">Amit</div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section> -->
+
+
+<script src="{%static 'JS/page.min.js'%}"></script>
+<script src="{%static 'JS/script.js'%}"></script>
+<script>
+    window.setTimeout(function() {
+        $("#audioplayer").trigger("play");
+    }, 2000);
+</script>
+<script>
+    function stopOtherMedia(element) {
+        //$("#audioplayer")[0].pause()
+        $("audio").not(element).each(function(index, audio) {
+            audio.pause();
+        });
+
+        $("video").not(element).each(function(index, video) {
+            video.pause();
+        });
+
+    }
+</script>
+{% endblock %}
